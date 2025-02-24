@@ -19,6 +19,8 @@ After you're done, answer the follow-up question:
 ## Deliverable
 Create a file named `ANSWERS.md` and document the **three** vulnerabilities you found. Then, answer our follow-up question.
 
+It is expected that you navigate through the application and look to the underlying code, so when documenting the vulnerabilities you can explain them and indicate the steps to exploit them.
+
 Make the changes to the code required to fix **one** of the vulnerabilities you found and commit your changes to the Git repository as you go. Make sure to add meaningful commit messages.
 
 Once you're done, archive the Git repository and send it back to us as a reply to the original challenge e-mail.
