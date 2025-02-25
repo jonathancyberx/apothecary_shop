@@ -29,7 +29,7 @@ The potion search functionality is vulnerable to SQL Injection (SQLi). The appli
 ```bash
 ' OR '1'='1
 ```
-**Result:** It reveals additional 5 potion entries, cofirming SQLi
+**Result:** It reveals total of 12 potion entries, cofirming SQLi
 
 ### Remediation
 
@@ -131,7 +131,7 @@ to
 ```
 Phoenix provides Phoenix.HTML.html_escape/1 for escaping user input.
 
-Additionall, I implemented Content Security Policy headers as follows
+Additionally, I implemented Content Security Policy headers as follows
 in the `lib/apothecary_web/endpoint.ex` file
 
 ```bash
