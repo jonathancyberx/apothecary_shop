@@ -196,7 +196,7 @@ jobs:
 
 - I attempted to enforce a Content Security Policy (CSP) to prevent inline scripts from executing and display an alert message when a violation occurred. However, ensuring the correct nonce was generated and passed to all necessary places proved complex.
 - Properly integrating this into Phoenix LiveView without interfering with existing functionality required an understanding of how LiveView dynamically injects and updates content.
-- While I aimed to block unauthorized scripts and display a clear "Not Allowed" message, making the implementation fully operational required additional troubleshooting beyond the available time.
+- While I aimed to block unauthorized scripts and display a clear "Not Allowed" message, making the implementation fully operational required additionally troubleshooting beyond the available time.
 
 ## Conclusion
 This assessment identified three critical vulnerabilities: SQL Injection, Stored XSS, and IDOR. A fix was implemented for the Stored XSS issue, and recommendations were provided for securing the application.
