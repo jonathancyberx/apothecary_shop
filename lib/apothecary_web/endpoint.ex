@@ -1,9 +1,6 @@
 defmodule ApothecaryWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :apothecary
 
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
     key: "_apothecary_key",
@@ -12,18 +9,12 @@ defmodule ApothecaryWeb.Endpoint do
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phx.digest
-  # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
     from: :apothecary,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
-  # Code reloading can be explicitly enabled under the
-  # :code_reloader configuration of your endpoint.
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
@@ -46,5 +37,20 @@ defmodule ApothecaryWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+
+  # Add CSP Headers
+  plug :put_secure_browser_headers
+
   plug ApothecaryWeb.Router
+
+  defp put_secure_browser_headers(conn, _opts) do
+  nonce = :crypto.strong_rand_bytes(16) |> Base.encode64() |> binary_part(0, 22)
+
+  conn
+  |> assign(:csp_nonce, nonce)  # Store nonce in conn.assigns
+  |> Plug.Conn.put_resp_header(
+    "content-security-policy",
+    "default-src 'self'; script-src 'self' 'nonce-#{nonce}'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+  )
+end
 end

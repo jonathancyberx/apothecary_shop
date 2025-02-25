@@ -42,3 +42,6 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+window.addEventListener("securitypolicyviolation", function(e) {
+    alert("Blocked Content: " + e.violatedDirective);
+});
